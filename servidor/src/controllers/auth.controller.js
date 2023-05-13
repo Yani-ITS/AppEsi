@@ -1,5 +1,6 @@
 const { User, sequelize } = require("./../models/user.model")
 const bcrypt = require('bcrypt')
+const jwt_generator = require('./../helper/jwt')
 
 //Funcion para que un usuario sea registrado
 const register = async (req, res) => {
@@ -86,6 +87,45 @@ const register = async (req, res) => {
         await transaction.rollback()
     }
 }
+
+const login = async (req, res) => {
+    const { email, pass } = req.body
+    try {
+        const user = await User.findOne(
+            { attributes: [ 'email', 'pass' ]},
+            { where: { email: email } }
+        )
+        if(!user){
+            res.status(404).json({
+                ok: false,
+                msg: 'Usuario no encontrado'
+            })
+        }
+
+        const validatePass = bcrypt.compareSync(pass, user[0].pass)
+
+        if(!validatePass) {
+            res.status(404).json({
+                ok: false,
+                msg: 'Contraseña incorrecta!'
+            })
+        }
+
+        const token = await jwt_generator(user[0].id_user)
+        res.status(200).json({
+            ok: true,
+            token,
+            msg: 'Usuario logeado'
+        })
+    }
+    catch (e) {
+        res.status(400).json({
+            ok: false,
+            msg: 'Error en el servidor'
+        })
+    }
+}
 module.exports = {
-    register
+    register,
+    login
 }
