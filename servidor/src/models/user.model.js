@@ -48,7 +48,7 @@ User.init(
             allowNull: false
         },
         birthdate: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         permissions: {

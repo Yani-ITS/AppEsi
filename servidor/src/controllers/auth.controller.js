@@ -1,6 +1,6 @@
 const { User, sequelize } = require("./../models/user.model")
 const bcrypt = require('bcrypt')
-const jwt_generator = require('./../helper/jwt')
+const { jwt_generator } = require('./../helper/jwt')
 
 //Funcion para que un usuario sea registrado
 const register = async (req, res) => {
@@ -14,30 +14,30 @@ const register = async (req, res) => {
 
     try {
 
-        //! Corroboramos que el email no este ya registrado:
-        const result = await User.findOne({ where: { email: email } })
-        if (result != null) { // Si devuelve un registro
+        //? Encriptamos la contraseña
+        const salt = bcrypt.genSaltSync();
+        const passwordHash = bcrypt.hashSync(pass.toString(), salt) // toString() sino pasa error
 
+        //! findOrCreate busca un registro, si no lo encuentra lo crea, caso contrario, devuelve
+        //! un valor booleano
+        const [user, created] = await User.findOrCreate({ 
+            where: { email }, 
+            defaults: { 
+                email: email, 
+                pass: passwordHash, 
+                birthdate: birthdate 
+            }, 
+            transaction: transaction
+        })
+        
+        if(!created){ //! Si ya está creado:
             res.status(400).json({ // Tira error
                 ok: false,
                 msg: 'El usuario ya existe'
             })
             await transaction.rollback() // Hacer un rollback
-
-            return // Cortamos la secuencia
+            return
         }
-
-        //! -------------------- Creamos el usuario ---------------------
-        //? Encriptamos la contraseña
-        const salt = bcrypt.genSaltSync();
-        const passwordHash = bcrypt.hashSync(pass, salt);
-        
-        // Creamos el usuario
-        const user = await User.create({
-            email: email,
-            pass: passwordHash,
-            birthdate: birthdate
-        }, { transaction: transaction })
 
         res.status(201).json({
             ok: true,
@@ -46,7 +46,7 @@ const register = async (req, res) => {
         })
 
         await transaction.commit() // Si todo OK, commitea los cambios
-        
+
         // TODO: Ver si necesitamos esta parte (¿el usuario se registra solo o crean la cuenta?)
         /* else {
             console.log('2')
@@ -85,6 +85,7 @@ const register = async (req, res) => {
             msg: 'Error en el servidor'
         })
         await transaction.rollback()
+        return
     }
 }
 
@@ -92,8 +93,8 @@ const login = async (req, res) => {
     const { email, pass } = req.body
     try {
         const user = await User.findOne(
-            { attributes: [ 'email', 'pass' ]},
-            { where: { email: email } }
+            { attributes: [ 'id_user', 'email', 'pass' ]},
+            { where: { email } }
         )
         if(!user){
             res.status(404).json({
@@ -101,8 +102,11 @@ const login = async (req, res) => {
                 msg: 'Usuario no encontrado'
             })
         }
+        const hashPass = user.getDataValue('pass')
+        console.log(hashPass);
 
-        const validatePass = bcrypt.compareSync(pass, user[0].pass)
+        const validatePass = bcrypt.compareSync(pass.toString(), hashPass)
+        console.log(validatePass);
 
         if(!validatePass) {
             res.status(404).json({
@@ -111,7 +115,10 @@ const login = async (req, res) => {
             })
         }
 
-        const token = await jwt_generator(user[0].id_user)
+        console.log(user.getDataValue('id_user'));
+
+        const token = await jwt_generator(user.getDataValue('id_user'))
+        console.log(token);
         res.status(200).json({
             ok: true,
             token,
@@ -125,7 +132,25 @@ const login = async (req, res) => {
         })
     }
 }
-module.exports = {
+
+//! TESTING!!
+const getAll = async(req, res) => {
+    try {
+        const users = await User.findAll()
+        const json = JSON.stringify(users)
+        res.status(200).json({
+            json,
+            users
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            ok:false
+        })
+    }
+}
+export const methods = {
     register,
-    login
+    login,
+    getAll
 }

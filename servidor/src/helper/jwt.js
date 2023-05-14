@@ -13,3 +13,7 @@ const jwt_generator = (uid) => {
         })
     })
 }
+
+module.exports = {
+    jwt_generator
+}
