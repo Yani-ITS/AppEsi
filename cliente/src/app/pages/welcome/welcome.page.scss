@@ -1,0 +1,80 @@
+ion-content {
+    max-height: 100%;
+    swiper-container {
+        background: var(--ion-color-primary-contrast);
+        min-height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Quicksand', sans-serif;
+        swiper-slide {
+            width: 100%;
+            min-height: 100%;
+            background: var(--ion-color-primary-contrast);
+            text-align: center;
+            padding: 4px 16px;
+            justify-content: center;
+            img.logo-its {
+                max-height: 200px;
+            }
+            img.children {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.1em;
+                text-align: justify;
+                font-weight: 300;
+            }
+            .access-logo-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-items: center;
+                text-align: center;
+                justify-content: center;
+                font-size: 3.5em;
+                border: 5px solid var(--ion-color-primary);
+                background: #cccccc;
+                width: 2em;
+                height: 2em;
+                border-radius: 50%;
+                margin: 8px auto;
+                
+            }
+
+        }
+    }
+
+    .bullets {
+        display: flex;
+        flex-direction: row;
+        width: 90px;
+        height: 16px;
+        margin: 8px auto;
+        .bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: gray;
+            margin: auto auto;
+        }
+        .bullet.active {
+            transform: scale(1.2);
+            background: var(--ion-color-primary);
+        }
+    }
+
+    ion-buttons {
+        min-width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding: 8px 16px;
+    }
+}
