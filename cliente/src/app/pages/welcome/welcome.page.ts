@@ -18,13 +18,14 @@ export class WelcomePage implements OnInit {
   swiperRef: ElementRef | undefined;
   swiperModules = [IonicSlides]         // le pasamos a swiper los modulos de IonicSlides
 
-  slideIndex  : number  = 0             // indice del slide
-  backDisabled: boolean = true          // desactivar el boton de regreso (indice 0)
-  nextDisabled: boolean = false         // desactivar el boton de siguiente (indice 2)
-  bullet1: boolean      = true          // activar bullet1
-  bullet2: boolean      = false         // activar bullet2
-  bullet3: boolean      = false         // activar bullet3
-  nextButtonText: string = 'Siguiente'  // textp del boton siguiente (Siguente || Comenzar!)
+  // variables de swiper, logica propia
+  slideIndex  :   number  = 0             // indice del slide
+  backDisabled:   boolean = true          // desactivar el boton de regreso (indice 0)
+  nextDisabled:   boolean = false         // desactivar el boton de siguiente (indice 2)
+  bullet1:        boolean = true          // activar bullet1
+  bullet2:        boolean = false         // activar bullet2
+  bullet3:        boolean = false         // activar bullet3
+  nextButtonText: string = 'Siguiente'    // texto del boton siguiente (Siguente || Comenzar!)
 
   constructor(
     // necesitamos usar Router para navegar al login
