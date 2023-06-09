@@ -1,4 +1,9 @@
+*{
+    overflow: hidden;
+}
+
 ion-content {
+    
     .wrapper {
         overflow: hidden;
         max-height: 100%;
@@ -14,15 +19,18 @@ ion-content {
         h2 {
             position: absolute;
             width: 100%;
-            margin-top: 8rem;
+            margin-top: 6rem;
             font-size: 2.4em;
             font-weight: 800;
             padding: 10%;
         }
 
         .form-container {
+            border-top: 0.0001rem rgba(214, 214, 214, 0.757) solid;
+            
+            overflow: hidden;
             transform: translateY(-2px);
-            height: 430px;
+            height: 80vh;
             flex-grow: 1;
             border-radius: 20px 20px 0px 0px;
             background: var(--ion-color-light);
@@ -36,7 +44,25 @@ ion-content {
             }
             ion-button {
                 margin: 20px 0px;
-            }             
+            }
+            
+            .access-logo-container {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-items: center;
+                text-align: center;
+                justify-content: center;
+                font-size: 3em;
+                border: 5px solid var(--ion-color-primary);
+                background: #cccccc;
+                width: 1.5em;
+                height: 1.5em;
+                border-radius: 50%;
+                margin: 32px auto;
+                
+            }
         }
     }
 }
