@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // modulos propios
-import { WelcomePageModule } from './pages/welcome/welcome.module';
+import { WelcomePageModule  } from './pages/welcome/welcome.module';
+import { LoginPageModule    } from './pages/auth/login/login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +17,10 @@ import { WelcomePageModule } from './pages/welcome/welcome.module';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    WelcomePageModule
+    WelcomePageModule,
+    LoginPageModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

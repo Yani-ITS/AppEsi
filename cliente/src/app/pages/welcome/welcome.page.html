@@ -38,7 +38,7 @@
     
     <ion-button slot="end" (click)="next()">
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      Siguiente
+      {{nextButtonText}}
     </ion-button>
 
     <ion-button *ngIf="!backDisabled" slot="start" (click)="previous()" >
