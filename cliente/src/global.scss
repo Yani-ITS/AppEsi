@@ -24,3 +24,22 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.text-size {
+    font-size: larger;
+}
+
+.zoom {
+    transform: scale(1.5);
+}
+
+.contrast-white {
+    background-color: white;
+}
+
+.constrast-black {
+    img {
+        opacity: 0.0 !important;
+    }
+    background: black !important;
+}

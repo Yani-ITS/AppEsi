@@ -1,0 +1,15 @@
+<div class="title" >
+  <h3>Menú de Accesibilidad</h3>
+</div>
+<div class="wrapper">
+  
+  <div class="row">
+    <div class="btn" *ngFor="let option of options; let i = index" (click)="onChangeBlackContrast(i)">
+      <ion-icon slot="start" color="light" [name]="option.icon"></ion-icon>
+      <p id="btn-text{{i}}">{{option.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <ion-button expand="block" color="primary" fill="solid" disabled="true">Guardar Cambios</ion-button>
+  </div>
+</div>

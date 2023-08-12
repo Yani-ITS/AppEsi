@@ -1,17 +1,23 @@
 <ion-content [fullscreen]="true">
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
       <img src="../../../../assets/img/welcome/005.png" alt="">
       <h2>Ingresa con tus datos</h2>
-      <div class="form-container">
+      <div id="form-container" class="form-container">
         <br><br>
-        <ion-input fill="outline" label="Usuario" type="text" placeholder="Ingresa Usuario" labelPlacement="floating" color="dark"></ion-input>
-        <ion-input fill="outline" label="Contraseña" type="password" placeholder="Ingresa Contraseña" labelPlacement="floating" color="dark"></ion-input>
+        <ion-input fill="outline" label="Usuario" type="text" placeholder="Ingresa Usuario" labelPlacement="floating"></ion-input>
+        <ion-input fill="outline" label="Contraseña" type="password" placeholder="Ingresa Contraseña" labelPlacement="floating" autocomplete="false"></ion-input>
         <ion-button click="onClick()" expand="block" color="dark" fill="solid">
           Ingresa
         </ion-button>
         <div class="access-logo-container">
-          <ion-icon color="primary" name="accessibility"></ion-icon>
+          <ion-icon id="open-access-menu" color="primary" name="accessibility"></ion-icon>
         </div>
       </div>
+      <ion-modal trigger="open-access-menu" [initialBreakpoint]="0.75" [breakpoints]="[0,0.75]">
+        <ng-template>
+          <app-accessibility></app-accessibility>
+        </ng-template>
+      </ion-modal>
     </div>
 </ion-content>
+

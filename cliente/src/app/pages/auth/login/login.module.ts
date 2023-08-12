@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { AccessibilityComponent } from 'src/app/components/shared/accessibility/accessibility.component';
 
 @NgModule({
   imports: [
@@ -14,10 +15,9 @@ import { LoginPage } from './login.page';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [LoginPage]
+  declarations: [LoginPage, AccessibilityComponent]
 })
 export class LoginPageModule {
 

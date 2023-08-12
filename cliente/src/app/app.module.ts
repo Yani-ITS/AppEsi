@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 // modulos propios
 import { WelcomePageModule  } from './pages/welcome/welcome.module';
 import { LoginPageModule    } from './pages/auth/login/login.module';
+import { AccessibilityComponent } from './components/shared/accessibility/accessibility.component';
 
 @NgModule({
   declarations: [AppComponent],
