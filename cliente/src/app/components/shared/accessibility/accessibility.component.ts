@@ -44,14 +44,38 @@ export class AccessibilityComponent  implements OnInit {
   //? boolean para registrar si la opcion de accesibilidad esta activada
   private blackContrastBln: boolean = false
 
+  //TODO crear booleanos para otras opciones
+
   constructor(
     //? servicio al cual llamaremos para que dispare opciones de accesibilidad
     private accService: AccessibilityService
   ) { }
 
+  // al inicio del componente chequeamos cual boton esta activo
   ngOnInit() {
     this.blackContrastBln = this.accService.contrastBlackActiveBln
+
+    //TODO hacer lo mismo aca con otras opciones
   }
+
+  // switch case para pasar diferentes metodos segun el indice
+  switchMethods(index: number) { // pasamos el indice como argumento
+    switch (index) { // y dependiendo de la opcion que pasemos  activa el metodo que corresponde.
+      case 0: // por ejemplo si el indice es 0, va a ejecutar el cambio de contraste
+        this.onChangeBlackContrast(index)
+        break;
+      //TODO aca agregar otros metodos para otras opciones.
+      // case 1:
+        // this.metodoQueCorresponda(index) 
+      //break
+      default:
+        break;
+    }
+  }
+
+
+
+
     
   //? esta funcion esta encargada de efectuar los cambios elegidos por el usuario 
   //? requiere el idice del boton para cambiar el color de texto del mismo cuando se activa
@@ -75,5 +99,8 @@ export class AccessibilityComponent  implements OnInit {
     // llamamos al servicio y le decimos que cambie y notifique a los componentes
     this.accService.changeContrastBlack()
   }
+
+  //TODO crear otros metodos para aplicar otras clases
+  
 
 }

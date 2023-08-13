@@ -25,18 +25,12 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-.text-size {
-    font-size: larger;
-}
+// ACA SE CREAN LAS CLASES QUE VAN A MODIFICAR EL DOM CON LA OPCION DESEADA
+// EL NOMBRE DE LA CLASE SE PASARA CUANDO SE LLAME EL METODO
+// Y EL ACCESIBILITY SERVICE DEBERIA NOTIFICAR A TODOS LOS COMPONENTES
 
-.zoom {
-    transform: scale(1.5);
-}
 
-.contrast-white {
-    background-color: white;
-}
-
+// clase para contraste negro
 .constrast-black {
     img {
         opacity: 0.0 !important;
