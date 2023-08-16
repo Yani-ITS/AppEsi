@@ -19,9 +19,15 @@ export class AccessibilityComponent  implements OnInit {
   //? De este array construimos las opciones de accesibilidad
   options: Option[] = [
     {
-      title: 'Contraste',
+      title: 'Modo Oscuro',
       icon: 'contrast-outline',
-      class: 'contrast',
+      class: 'modo oscuro',
+    },
+
+    {
+      title: 'Alto Contraste',
+      icon: 'invert-mode-outline',
+      class: 'alto contraste'
     },
 
     {
@@ -38,11 +44,14 @@ export class AccessibilityComponent  implements OnInit {
       title: 'Zoom',
       icon: 'search-outline',
       class: 'zoom'
-    },
+    }
+
   ]
 
   //? boolean para registrar si la opcion de accesibilidad esta activada
   private blackContrastBln: boolean = false
+
+  private highContrastClr: boolean = false
 
   //TODO crear booleanos para otras opciones
 
@@ -55,6 +64,7 @@ export class AccessibilityComponent  implements OnInit {
   ngOnInit() {
     this.blackContrastBln = this.accService.contrastBlackActiveBln
 
+    this.highContrastClr = this.accService.highContrastActiveClr
     //TODO hacer lo mismo aca con otras opciones
   }
 
@@ -68,15 +78,17 @@ export class AccessibilityComponent  implements OnInit {
       // case 1:
         // this.metodoQueCorresponda(index) 
       //break
+
+      case 1:
+        this.onChangeHighContrast(index)
+        break;
+
+
       default:
         break;
     }
   }
 
-
-
-
-    
   //? esta funcion esta encargada de efectuar los cambios elegidos por el usuario 
   //? requiere el idice del boton para cambiar el color de texto del mismo cuando se activa
   onChangeBlackContrast(index: number) {
@@ -101,6 +113,24 @@ export class AccessibilityComponent  implements OnInit {
   }
 
   //TODO crear otros metodos para aplicar otras clases
+
+  onChangeHighContrast(index: number) {
+
+    const btn: HTMLElement | null = document.getElementById(`btn-text${index}`)
+    
+    this.highContrastClr = !this.highContrastClr
+
+    if(this.highContrastClr === true) {
+      btn?.classList.add('active')
+    }
+
+    else {
+      btn?.classList.remove('active')
+    }
+
+    this.accService.changeHighContrast()
+
+  }
   
 
 }

@@ -37,3 +37,38 @@
     }
     background: black !important;
 }
+
+// Clase para alto contraste para personas con visibilidad reducida/daltónicos
+
+.high-visibility {
+    img {
+        opacity: 0.0 !important;
+    }
+
+    h2{
+        color:#4d333b;
+    }
+
+    ion-input{
+        background: #4d333b;
+        color: #e5ca99;
+        --highlight-color-focused: #e5ca99;
+        }
+
+    .ion-color-dark {
+            --ion-color-base: #4d333b !important;
+            --ion-color-contrast: #e5ca99 !important;
+    }
+
+    #access-logo-ctn {
+        color: #4d333b;
+        border: 5px solid #4d333b !important;
+        --ion-color-primary: #e5ca99 !important;
+        background: #4d333b !important;
+    }
+
+    background: #e5ca99 !important;
+
+}
+
+

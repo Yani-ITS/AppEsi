@@ -6,7 +6,7 @@
   <div class="row">
     <!-- el boton activa o desactiva la opcion deseada -->
     <!-- pasamos el metodo para elegir la opcion deseada (switchMethods(indice)) -->
-    <div class="btn" *ngFor="let option of options; let i = index" (click)="switchMethods(i)">
+    <div id="btn-option" class="btn" *ngFor="let option of options; let i = index" (click)="switchMethods(i)">
       <ion-icon slot="start" color="light" [name]="option.icon"></ion-icon>
       <p id="btn-text{{i}}">{{option.title}}</p>
     </div>

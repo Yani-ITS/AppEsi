@@ -12,6 +12,9 @@ export class LoginPage implements OnInit {
   //? Variable que instanciara la suscripcion a cambios en contraste
   private contrastBlackSuscription?: Subscription;
 
+  // Variable que instanciara la suscripción a cambios en alto contraste
+  private highContrastSuscription?: Subscription;
+
   constructor(
     private accService: AccessibilityService
   ) { 
@@ -21,6 +24,16 @@ export class LoginPage implements OnInit {
           this.addUniqueClass(['wrapper', 'form-container'], 'constrast-black')
         } else {
           this.removeUniqueClass(['wrapper', 'form-container'], 'constrast-black')
+        }
+      })
+    }),
+
+    this.highContrastSuscription = this.accService.highContrast$.subscribe({
+      next: (active =>{
+        if(active === true) {
+          this.addUniqueClass(['wrapper', 'form-container', 'access-logo-ctn'], 'high-visibility')
+        } else {
+          this.removeUniqueClass(['wrapper', 'form-container', 'access-logo-ctn'], 'high-visibility')
         }
       })
     })

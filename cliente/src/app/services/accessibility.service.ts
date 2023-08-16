@@ -13,6 +13,12 @@ export class AccessibilityService {
   private contrastBlackActive = new Subject<boolean>()
   public contrastBlack$ = this.contrastBlackActive.asObservable()
 
+  // Variables para alto contraste
+
+  public highContrastActiveClr: boolean = false
+  private highContrastActive = new Subject<boolean>()
+  public highContrast$ = this.highContrastActive.asObservable()
+
   // TODO agregar variables para cada una de las opciones
 
   constructor() { }
@@ -25,6 +31,13 @@ export class AccessibilityService {
   changeContrastBlack() : void {
     this.contrastBlackActiveBln = !this.contrastBlackActiveBln
     this.contrastBlackActive.next(this.contrastBlackActiveBln) 
+  }
+
+  // Método para cambiar variables de alto contraste
+
+  changeHighContrast() : void {
+    this.highContrastActiveClr = !this.highContrastActiveClr
+    this.highContrastActive.next(this.highContrastActiveClr)
   }
 
   //TODO agregar metodos para cada una de las opciones
