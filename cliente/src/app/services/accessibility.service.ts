@@ -13,6 +13,12 @@ export class AccessibilityService {
   private contrastBlackActive = new Subject<boolean>()
   public contrastBlack$ = this.contrastBlackActive.asObservable()
 
+    //variables para el aumento de tamaño del texto
+    public mediumFontActivateBln: boolean = false
+    private mediumFontActive = new Subject<boolean>()
+    public mediumFont$ = this.mediumFontActive.asObservable()
+  
+
   // TODO agregar variables para cada una de las opciones
 
   constructor() { }
@@ -26,6 +32,12 @@ export class AccessibilityService {
     this.contrastBlackActiveBln = !this.contrastBlackActiveBln
     this.contrastBlackActive.next(this.contrastBlackActiveBln) 
   }
+    // metodo para aumentar el tamaño de las letras
+    changeMediumFont() : void {
+      this.mediumFontActivateBln = !this.mediumFontActivateBln
+      this.mediumFontActive.next(this.mediumFontActivateBln)
+    }
+  
 
   //TODO agregar metodos para cada una de las opciones
   

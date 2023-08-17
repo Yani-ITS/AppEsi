@@ -43,6 +43,8 @@ export class AccessibilityComponent  implements OnInit {
 
   //? boolean para registrar si la opcion de accesibilidad esta activada
   private blackContrastBln: boolean = false
+  private fontMediumBln : boolean = false
+  
 
   //TODO crear booleanos para otras opciones
 
@@ -54,6 +56,7 @@ export class AccessibilityComponent  implements OnInit {
   // al inicio del componente chequeamos cual boton esta activo
   ngOnInit() {
     this.blackContrastBln = this.accService.contrastBlackActiveBln
+    this.fontMediumBln = this.accService.mediumFontActivateBln
 
     //TODO hacer lo mismo aca con otras opciones
   }
@@ -65,9 +68,10 @@ export class AccessibilityComponent  implements OnInit {
         this.onChangeBlackContrast(index)
         break;
       //TODO aca agregar otros metodos para otras opciones.
-      // case 1:
-        // this.metodoQueCorresponda(index) 
-      //break
+      case 2:
+        this.onChangeFontSize(index)
+        break;
+
       default:
         break;
     }
@@ -99,6 +103,24 @@ export class AccessibilityComponent  implements OnInit {
     // llamamos al servicio y le decimos que cambie y notifique a los componentes
     this.accService.changeContrastBlack()
   }
+
+    //? esta funcion esta encargada de efectuar los cambios elegidos por el usuario 
+  //? requiere el idice del boton para cambiar el color de texto del mismo cuando se activa
+  onChangeFontSize(index: number) {
+
+    const btn: HTMLElement | null = document.getElementById(`btn-text${index}`)
+
+    this.fontMediumBln = !this.fontMediumBln
+
+    if (this.fontMediumBln === true) {
+      btn?.classList.add('active')
+    }
+    else {
+      btn?.classList.remove('active')
+    }
+    this.accService.changeMediumFont()
+  }
+
 
   //TODO crear otros metodos para aplicar otras clases
   
