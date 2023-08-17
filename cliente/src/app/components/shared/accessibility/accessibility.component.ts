@@ -42,7 +42,8 @@ export class AccessibilityComponent  implements OnInit {
   ]
 
   //? boolean para registrar si la opcion de accesibilidad esta activada
-  private blackContrastBln: boolean = false
+  private blackContrastBln: boolean = false;
+  private brighLightBln: boolean = false;
 
   //TODO crear booleanos para otras opciones
 
@@ -54,6 +55,7 @@ export class AccessibilityComponent  implements OnInit {
   // al inicio del componente chequeamos cual boton esta activo
   ngOnInit() {
     this.blackContrastBln = this.accService.contrastBlackActiveBln
+    this.brighLightBln = this.accService.luminousActiveBln
 
     //TODO hacer lo mismo aca con otras opciones
   }
@@ -65,24 +67,37 @@ export class AccessibilityComponent  implements OnInit {
         this.onChangeBlackContrast(index)
         break;
       //TODO aca agregar otros metodos para otras opciones.
-      // case 1:
-        // this.metodoQueCorresponda(index) 
-      //break
+      case 1:
+        this.onChangeBright(index)
+        break;
       default:
         break;
     }
+  }
+  onChangeBright(index: number) {
+    const btn: HTMLElement | null = document.getElementById(`btn-text${index}`)
+    this.brighLightBln = !this.brighLightBln
+
+    if (this.brighLightBln === true){
+      btn?.classList.add('active')
+    }
+    else{
+      btn?.classList.remove('active')
+    }
+
+    this.accService.changeBrigth()
   }
 
 
 
 
-    
-  //? esta funcion esta encargada de efectuar los cambios elegidos por el usuario 
+
+  //? esta funcion esta encargada de efectuar los cambios elegidos por el usuario
   //? requiere el idice del boton para cambiar el color de texto del mismo cuando se activa
   onChangeBlackContrast(index: number) {
 
     // con el color del texto identificamos el elemnto HTML que representa al boton
-    const btn: HTMLElement | null = document.getElementById(`btn-text${index}`) 
+    const btn: HTMLElement | null = document.getElementById(`btn-text${index}`)
 
     // cuando lo presionamos se cambia el valor del booleano (true = activo, false = inactivo)
     this.blackContrastBln = !this.blackContrastBln
@@ -91,7 +106,7 @@ export class AccessibilityComponent  implements OnInit {
     if(this.blackContrastBln === true) {
       btn?.classList.add('active')
     }
-    // si es falso, que lo deje con el color por defecto 
+    // si es falso, que lo deje con el color por defecto
     else {
       btn?.classList.remove('active')
     }
@@ -101,6 +116,6 @@ export class AccessibilityComponent  implements OnInit {
   }
 
   //TODO crear otros metodos para aplicar otras clases
-  
+
 
 }

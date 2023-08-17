@@ -11,10 +11,11 @@ export class LoginPage implements OnInit {
 
   //? Variable que instanciara la suscripcion a cambios en contraste
   private contrastBlackSuscription?: Subscription;
+  private changeBrightSuscription?: Subscription;
 
   constructor(
     private accService: AccessibilityService
-  ) { 
+  ) {
     this.contrastBlackSuscription = this.accService.contrastBlack$.subscribe({
       next: (active => {
         if(active === true) {
@@ -23,15 +24,25 @@ export class LoginPage implements OnInit {
           this.removeUniqueClass(['wrapper', 'form-container'], 'constrast-black')
         }
       })
+    });
+    this.changeBrightSuscription = this.accService.luminousHtml$.subscribe({
+      next: (active =>{
+        if(active === true){
+          this.addUniqueClass(['wrapper','form-container'], 'bright')
+        } else{
+          this.removeUniqueClass(['wrapper', 'form-container'], 'bright')
+        }
+      })
     })
    }
 
   ngOnInit() {
-    
+
   }
 
   ngOnDestroy(): void {
     this.contrastBlackSuscription?.unsubscribe()
+    this.changeBrightSuscription?.unsubscribe()
   }
 
 
@@ -50,5 +61,7 @@ export class LoginPage implements OnInit {
       htmlElement?.classList.remove(_class)
     }
   }
+
+
 
 }

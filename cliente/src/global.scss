@@ -37,3 +37,9 @@
     }
     background: black !important;
 }
+
+//clase para cambiar luminosidad
+
+.bright{
+  filter: brightness(150%);
+}
